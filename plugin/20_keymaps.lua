@@ -184,11 +184,6 @@ nmap_leader("sn", "<Cmd>lua " .. session_new .. "<CR>", "New")
 nmap_leader("sr", '<Cmd>lua MiniSessions.select("read")<CR>', "Read")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 
--- t is for 'Terminal'
--- TODO: Replace with toggleterm
-nmap_leader("tT", "<Cmd>horizontal term<CR>", "Terminal (horizontal)")
-nmap_leader("tt", "<Cmd>vertical term<CR>", "Terminal (vertical)")
-
 -- v is for 'Visits'. Common usage:
 -- - `<Leader>vv` - add    "core" label to current file.
 -- - `<Leader>vV` - remove "core" label to current file.

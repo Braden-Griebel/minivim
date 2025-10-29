@@ -186,6 +186,7 @@ later(function()
     clues = {
       -- This is defined in 'plugin/20_keymaps.lua' with Leader group descriptions
       Config.leader_group_clues,
+      { mode = "n", keys = "gz", desc = "Slime" },
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
       miniclue.gen_clues.marks(),
@@ -216,6 +217,11 @@ later(function()
       { mode = "n", keys = "<C-w>" }, -- Window commands
       { mode = "n", keys = "z" },     -- `z` key
       { mode = "x", keys = "z" },
+      { mode = "n", keys = "s" },     -- For mini surround
+    },
+    window = {
+      delay = 250,
+      config = { width = "auto", },
     },
   })
 end)
