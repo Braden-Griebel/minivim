@@ -84,8 +84,6 @@ now(function()
 end)
 
 -- Starter
--- TODO: Config
-
 -- Add fortune.nvim
 now(function()
 	add({ source = "rubiin/fortune.nvim", checkout = "master" })
@@ -122,7 +120,7 @@ now(function()
 			{
 				name = "Root",
 				action = function()
-					MiniFiles.open(_G.find_git_root())
+					MiniFiles.open(_G.find_git_root_no_buf())
 				end,
 				section = "Explore",
 			},
