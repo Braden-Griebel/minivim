@@ -392,3 +392,10 @@ later(function()
 	})
 	nmap_leader("et", "<cmd>Neotree reveal<cr>", "Tree")
 end)
+
+-- Todo Comments =======================================================
+later(function()
+	add({ source = "folke/todo-comments.nvim", depends = { "nvim-lua/plenary.nvim" } })
+	require("todo-comments").setup({})
+	nmap_leader("ft", "<cmd>TodoQuickFix<cr>", "Todo QuickFix")
+end)
