@@ -37,3 +37,9 @@ This config currently sets up LSPs/settings for
 - R
 - Rust
 - Typst
+
+## Integrations
+
+Tmux is the default terminal multiplexer used by this config.
+Tmux-navigator is used to move between tmux panes, and
+vim-slime defaults to using tmux as its target.
