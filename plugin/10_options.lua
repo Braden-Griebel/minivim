@@ -6,10 +6,14 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+-- Force enable true color
+vim.o.termguicolors = true
+
 -- Enable mouse
 vim.o.mouse = "a"
 -- Change how many lines the mouse scrolls
 vim.o.mousescroll = "ver:25,hor:6"
+
 -- Change buffer switching behavior
 -- This option uses already opened tabs when jumping (for e.g. quickfix)
 vim.o.switchbuf = "usetab"
