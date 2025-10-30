@@ -2,16 +2,16 @@
 
 -- Helper function for creating new normal mode mappings
 local nmap = function(lhs, rhs, desc)
-  -- See `:h vim.keymap.set()`
-  vim.keymap.set("n", lhs, rhs, { desc = desc })
+	-- See `:h vim.keymap.set()`
+	vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
 
 -- Helper for creating <leader> mappings
 local nmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
+	vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
 end
 local xmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set("x", "<Leader>" .. suffix, rhs, { desc = desc })
+	vim.keymap.set("x", "<Leader>" .. suffix, rhs, { desc = desc })
 end
 
 -- Linewise paste
@@ -20,25 +20,25 @@ nmap("]p", '<Cmd>exe "put "  . v:register<CR>', "Paste Below")
 
 -- Create table with information about Leader groups
 _G.Config.leader_group_clues = {
-  { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
-  { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
-  { mode = "n", keys = "<Leader>f", desc = "+Find" },
-  { mode = "n", keys = "<Leader>g", desc = "+Git" },
-  { mode = "n", keys = "<Leader>l", desc = "+Language" },
-  { mode = "n", keys = "<Leader>m", desc = "+Map" },
-  { mode = "n", keys = "<Leader>o", desc = "+Other" },
-  { mode = "n", keys = "<Leader>s", desc = "+Session" },
-  { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
-  { mode = "n", keys = "<Leader>v", desc = "+Visits" },
+	{ mode = "n", keys = "<Leader>b", desc = "+Buffer" },
+	{ mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
+	{ mode = "n", keys = "<Leader>f", desc = "+Find" },
+	{ mode = "n", keys = "<Leader>g", desc = "+Git" },
+	{ mode = "n", keys = "<Leader>l", desc = "+Language" },
+	{ mode = "n", keys = "<Leader>m", desc = "+Map" },
+	{ mode = "n", keys = "<Leader>o", desc = "+Other" },
+	{ mode = "n", keys = "<Leader>s", desc = "+Session" },
+	{ mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+	{ mode = "n", keys = "<Leader>v", desc = "+Visits" },
 
-  { mode = "x", keys = "<Leader>g", desc = "+Git" },
-  { mode = "x", keys = "<Leader>l", desc = "+Language" },
+	{ mode = "x", keys = "<Leader>g", desc = "+Git" },
+	{ mode = "x", keys = "<Leader>l", desc = "+Language" },
 }
 
 -- Buffer Keymaps
 -- Create new scratch buffer
 local new_scratch_buffer = function()
-  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
+	vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
 nmap_leader("bb", "<Cmd>b#<CR>", "Other Buffer")
@@ -58,19 +58,19 @@ nmap("<S-l>", "<cmd>bnext<cr>", "Next Buffer")
 -- - `<Leader>ei` - edit 'init.lua'
 -- - All mappings that use `edit_plugin_file` - edit 'plugin/' config files
 local edit_plugin_file = function(filename)
-  return string.format("<Cmd>edit %s/plugin/%s<CR>", vim.fn.stdpath("config"), filename)
+	return string.format("<Cmd>edit %s/plugin/%s<CR>", vim.fn.stdpath("config"), filename)
 end
 local explore_at_file = "<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>"
 local explore_quickfix = function()
-  for _, win_id in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.fn.getwininfo(win_id)[1].quickfix == 1 then
-      return vim.cmd("cclose")
-    end
-  end
-  vim.cmd("copen")
+	for _, win_id in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.fn.getwininfo(win_id)[1].quickfix == 1 then
+			return vim.cmd("cclose")
+		end
+	end
+	vim.cmd("copen")
 end
 local explore_at_root = function()
-  MiniFiles.open(_G.find_git_root())
+	MiniFiles.open(_G.find_git_root())
 end
 
 nmap_leader("ed", "<Cmd>lua MiniFiles.open()<CR>", "Directory")
@@ -189,11 +189,11 @@ nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 -- - `<Leader>vV` - remove "core" label to current file.
 -- - `<Leader>vc` - pick among all files with "core" label.
 local make_pick_core = function(cwd, desc)
-  return function()
-    local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
-    local local_opts = { cwd = cwd, filter = "core", sort = sort_latest }
-    MiniExtra.pickers.visit_paths(local_opts, { source = { name = desc } })
-  end
+	return function()
+		local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
+		local local_opts = { cwd = cwd, filter = "core", sort = sort_latest }
+		MiniExtra.pickers.visit_paths(local_opts, { source = { name = desc } })
+	end
 end
 
 nmap_leader("vc", make_pick_core("", "Core visits (all)"), "Core visits (all)")
@@ -205,3 +205,11 @@ nmap_leader("vL", "<Cmd>lua MiniVisits.remove_label()<CR>", "Remove label")
 
 -- Map for stopping search highlights
 nmap("<ESC>", "<cmd>nohlsearch<cr>", "Hide Search Highlights")
+
+-- Maps for toggling virtual text
+nmap("\\vt", function()
+	vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
+end, "Toggle virtual text")
+nmap("\\vl", function()
+	vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+end, "Toggle virtual lines")

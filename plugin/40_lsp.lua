@@ -6,14 +6,37 @@ now_if_args(function()
 	add("neovim/nvim-lspconfig")
 
 	vim.lsp.enable({
+		-- == C/C++ ==
+		"clangd",
+		-- == Fortran ==
+		"fortls",
+		-- == Go ==
+		"gopls",
+		-- == Javascript/Typescript ==
+		"denols",
+		-- == Lean ==
+		"leanls",
 		-- == Lua ==
 		"lua_ls",
+		-- == Markdown ==
+		"marksman",
+		"harper_ls",
+		-- == Ocaml ==
+		"ocamllsp",
 		-- == Python ==
 		"pyright",
 		"ruff",
+		-- == R ==
+		"r_language_server",
+		-- == Shell ==
+		"bashls",
+		"fish_lsp",
 		-- == Typst ==
 		"tinymist",
-		-- == Markdown ==
+		-- == Config ==
+		"jsonls",
+		"lemminx",
+		"yamlls",
 	})
 end)
 
