@@ -21,6 +21,7 @@ now_if_args(function()
 		-- == Markdown ==
 		"marksman",
 		"harper_ls",
+		"mdformat",
 		-- == Ocaml ==
 		"ocamllsp",
 		-- == Python ==
