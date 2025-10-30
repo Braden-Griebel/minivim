@@ -32,64 +32,74 @@ now_if_args(function()
 		-- Same logic as for 'nvim-treesitter'
 		checkout = "main",
 	})
-	require("nvim-treesitter").setup({
-		ensure_installed = {
-			"asm",
-			"c",
-			"cmake",
-			"cpp",
-			"css",
-			"fish",
-			"fortran",
-			"git_config",
-			"git_rebase",
-			"gitattributes",
-			"gitcommit",
-			"gitignore",
-			"gleam",
-			"go",
-			"haskell",
-			"html",
-			"ini",
-			"java",
-			"javadoc",
-			"javascript",
-			"json",
-			"julia",
-			"just",
-			"kdl",
-			"latex",
-			"lua",
-			"markdown",
-			"meson",
-			"nix",
-			"ocaml",
-			"pip_requirements",
-			"python",
-			"r",
-			"rust",
-			"sql",
-			"sway",
-			"typescript",
-			"typst",
-			"verilog",
-			"vim",
-			"vimdoc",
-			"xml",
-			"yaml",
-			"zig",
-		},
-		-- Autoinstall languages that are not installed
-		auto_install = true,
-		highlight = {
-			enable = true,
-			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-			--  If you are experiencing weird indenting issues, add the language to
-			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-			additional_vim_regex_highlighting = { "ruby" },
-		},
-		indent = { enable = true, disable = { "ruby" } },
-	})
+
+	-- Define languages which will have parsers installed and auto enabled
+	local languages = {
+		-- These are already pre-installed with Neovim. Used as an example.
+		"asm",
+		"c",
+		"cmake",
+		"cpp",
+		"css",
+		"fish",
+		"fortran",
+		"git_config",
+		"git_rebase",
+		"gitattributes",
+		"gitcommit",
+		"gitignore",
+		"gleam",
+		"go",
+		"haskell",
+		"html",
+		"ini",
+		"java",
+		"javadoc",
+		"javascript",
+		"json",
+		"julia",
+		"just",
+		"kdl",
+		"latex",
+		"lua",
+		"markdown",
+		"meson",
+		"nix",
+		"ocaml",
+		"pip_requirements",
+		"python",
+		"r",
+		"rust",
+		"sql",
+		"sway",
+		"typescript",
+		"typst",
+		"verilog",
+		"vim",
+		"vimdoc",
+		"xml",
+		"yaml",
+		"zig",
+	}
+	local isnt_installed = function(lang)
+		return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+	end
+	local to_install = vim.tbl_filter(isnt_installed, languages)
+	if #to_install > 0 then
+		require("nvim-treesitter").install(to_install)
+	end
+
+	-- Enable tree-sitter after opening a file for a target language
+	local filetypes = {}
+	for _, lang in ipairs(languages) do
+		for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+			table.insert(filetypes, ft)
+		end
+	end
+	local ts_start = function(ev)
+		vim.treesitter.start(ev.buf)
+	end
+	_G.Config.new_autocmd("FileType", filetypes, ts_start, "Start tree-sitter")
 end)
 
 -- Formatting =================================================================
