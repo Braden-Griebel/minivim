@@ -2,6 +2,8 @@
 
 Neovim Config Based on Mini Plugin Suite
 
+Based on the [MiniMax](https://github.com/nvim-mini/MiniMax) config from mini.nvim
+
 ## Installation
 
 ### Dependencies
@@ -12,7 +14,7 @@ Install needed dependencies:
 - lazygit
 - ripgrep
 
-### Clone repo
+### Clone RPO
 
 Simply clone into ~/.config/nvim
 
