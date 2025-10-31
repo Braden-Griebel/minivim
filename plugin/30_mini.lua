@@ -11,21 +11,9 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = _G.Config.now_if_args
 
 -- Step one ===================================================================
--- Enable 'miniwinter' color scheme. It comes with 'mini.nvim' and uses 'mini.hues'.
---
--- See also:
--- - `:h mini.nvim-color-schemes` - list of other color schemes
--- - `:h MiniHues-examples` - how to define highlighting with 'mini.hues'
--- - 'plugin/40_plugins.lua' honorable mentions - other good color schemes
+-- Set rose-pine colorscheme (built using mini.base16)
 now(function()
-	-- vim.cmd("colorscheme miniautumn")
-	require("mini.hues").setup({
-		background = "#191724",
-		foreground = "#e0def4",
-		saturation = "medium",
-		n_hues = 6,
-		accent = "bg",
-	})
+	vim.cmd("colorscheme rose-pine")
 end)
 
 -- Basics

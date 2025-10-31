@@ -286,7 +286,7 @@ end)
 later(function()
 	add("mrcjkb/rustaceanvim")
 	add("Saecki/crates.nvim")
-	require("crates").setup()
+	require("crates").setup({})
 end)
 
 -- Slueth ================================================================
