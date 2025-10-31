@@ -69,7 +69,9 @@ end)
 
 -- Notify
 now(function()
-	require("mini.notify").setup()
+	require("mini.notify").setup({
+		lsp_progress = { enable = false }, -- Prefer noice for this
+	})
 end)
 
 -- Sessions
