@@ -21,9 +21,5 @@ return {
 				arguments = { vim.v.null },
 			}, { bufnr = bufnr })
 		end, { desc = "[T]inymist [U]npin", noremap = true })
-		-- Add clue to mini clue
-		require("mini.clue").setup({ clues = {
-			{ mode = "n", keys = "<localleader>t", desc = "Tinymist" },
-		} })
 	end,
 }
