@@ -398,3 +398,34 @@ later(function()
 	require("todo-comments").setup({})
 	nmap_leader("ft", "<cmd>TodoQuickFix<cr>", "Todo QuickFix")
 end)
+
+-- Noice ===============================================================
+later(function()
+	add({ source = "folke/noice.nvim", depends = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" } })
+	require("noice").setup({
+		cmdline = {
+			enable = true,
+			view = "cmdline_popup",
+		},
+		messages = {
+			enabled = true,
+		},
+		popupmenu = {
+			enabled = false,
+		},
+		notify = {
+			enabled = true,
+			view = "mini",
+		},
+		lsp = {
+			progress = { enabled = true },
+			hover = { enabled = false },
+			signature = { enabled = false },
+			message = { enabled = true, view = "notify" },
+		},
+		presets = {
+			bottom_search = true,
+			command_palette = true,
+		},
+	})
+end)
