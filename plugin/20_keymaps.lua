@@ -90,6 +90,10 @@ nmap_leader("er", explore_at_root, "Root")
 -- All these use 'mini.pick'. See `:h MiniPick-overview` for an overview.
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
 
+local pick_quickfix = function()
+	MiniExtra.pickers.list({ scope = "quickfix" })
+end
+
 nmap_leader("f/", '<Cmd>Pick history scope="/"<CR>', '"/" history')
 nmap_leader("f:", '<Cmd>Pick history scope=":"<CR>', '":" history')
 nmap_leader("fa", '<Cmd>Pick git_hunks scope="staged"<CR>', "Added hunks (all)")
@@ -108,6 +112,7 @@ nmap_leader("fl", '<Cmd>Pick buf_lines scope="all"<CR>', "Lines (all)")
 nmap_leader("fL", '<Cmd>Pick buf_lines scope="current"<CR>', "Lines (buf)")
 nmap_leader("fm", "<Cmd>Pick git_hunks<CR>", "Modified hunks (all)")
 nmap_leader("fM", '<Cmd>Pick git_hunks path="%"<CR>', "Modified hunks (buf)")
+nmap_leader("fq", pick_quickfix, "Quickfix")
 nmap_leader("fr", "<Cmd>Pick resume<CR>", "Resume")
 nmap_leader("fR", '<Cmd>Pick lsp scope="references"<CR>', "References (LSP)")
 nmap_leader("fs", '<Cmd>Pick lsp scope="workspace_symbol"<CR>', "Symbols workspace")
@@ -213,3 +218,21 @@ end, "Toggle virtual text")
 nmap("\\vl", function()
 	vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
 end, "Toggle virtual lines")
+
+-- Create a keymap for selecting a random colorscheme
+local random_colorscheme = function()
+	local colorschemes = vim.fn.getcompletion("", "color")
+	local new_scheme = colorschemes[math.random(#colorschemes)]
+	vim.notify("New colorscheme: " .. new_scheme)
+	vim.cmd.colorscheme(new_scheme)
+end
+
+nmap_leader("oc", random_colorscheme, "Set Random Colorscheme")
+
+-- Create a keymap for picking a new colorscheme
+local pick_colorscheme = function()
+	local new_scheme = MiniPick.start({ source = { items = vim.fn.getcompletion("", "color") } })
+	vim.cmd.colorscheme(new_scheme)
+end
+
+nmap_leader("op", pick_colorscheme, "Pick Colorscheme")
