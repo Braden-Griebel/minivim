@@ -107,8 +107,4 @@ later(function()
 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 		},
 	})
-
-	-- Add and setup fidget
-	add("j-hui/fidget.nvim")
-	require("fidget").setup({})
 end)
