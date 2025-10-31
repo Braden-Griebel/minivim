@@ -254,6 +254,11 @@ later(function()
 	-- Advertise to servers that Neovim now supports certain set of completion and
 	-- signature features through 'mini.completion'.
 	vim.lsp.config("*", { capabilities = MiniCompletion.get_lsp_capabilities() })
+
+	-- Add a keymap for disabling completion
+	vim.keymap.set("n", "\\p", function()
+		require("mini.completion").setup({ delay = { completion = 10 ^ 7, info = 10 ^ 7, signature = 10 ^ 7 } })
+	end, { desc = "Toggle 'cm[p]'" })
 end)
 
 -- Autohighlight
