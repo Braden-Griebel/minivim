@@ -198,6 +198,8 @@ later(function()
 		triggers = {
 			{ mode = "n", keys = "<Leader>" }, -- Leader triggers
 			{ mode = "x", keys = "<Leader>" },
+			{ mode = "n", keys = "<localleader>" },
+			{ mode = "v", keys = "<localleader>" },
 			{ mode = "n", keys = "\\" }, -- mini.basics
 			{ mode = "n", keys = "[" }, -- mini.bracketed
 			{ mode = "n", keys = "]" },
