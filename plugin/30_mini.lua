@@ -64,7 +64,7 @@ now_if_args(function()
 
 	-- Synchronize terminal emulator background with Neovim's background to remove
 	-- possibly different color padding around Neovim instance
-	MiniMisc.setup_termbg_sync()
+	-- MiniMisc.setup_termbg_sync() -- Fails frequently
 end)
 
 -- Notify
@@ -72,6 +72,9 @@ now(function()
 	require("mini.notify").setup({
 		lsp_progress = { enable = false }, -- Prefer noice for this
 	})
+	vim.keymap.set("n", "<leader>oh", function()
+		MiniNotify.show_history()
+	end, { desc = "Show Notification History" })
 end)
 
 -- Sessions

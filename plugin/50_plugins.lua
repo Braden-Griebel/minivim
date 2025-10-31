@@ -400,6 +400,7 @@ later(function()
 end)
 
 -- Noice ===============================================================
+-- Some nice UI elements, only using LSP progress and command line (notify handled by mini)
 later(function()
 	add({ source = "folke/noice.nvim", depends = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" } })
 	require("noice").setup({
@@ -409,23 +410,29 @@ later(function()
 		},
 		messages = {
 			enabled = true,
+			view = "notify",
 		},
 		popupmenu = {
 			enabled = false,
+			view = "hover",
 		},
 		notify = {
-			enabled = true,
-			view = "mini",
+			enabled = false,
+			view = "notify",
 		},
 		lsp = {
 			progress = { enabled = true },
 			hover = { enabled = false },
 			signature = { enabled = false },
-			message = { enabled = true, view = "notify" },
+			message = { enabled = true, view = "mini" },
+		},
+		commands = {
+			history = {
+				view = "popup",
+			},
 		},
 		presets = {
 			bottom_search = true,
-			command_palette = true,
 		},
 	})
 end)
