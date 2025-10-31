@@ -172,6 +172,10 @@ later(function()
 	vim.cmd([[hi GitSignsDelete guifg=#fa2525]])
 	add("kdheepak/lazygit.nvim")
 	nmap_leader("gz", "<cmd>LazyGit<cr>", "LazyGit")
+
+	-- Diff view
+	add("sindrets/diffview.nvim")
+	require("diffview").setup({})
 end)
 
 -- Marks ======================================================================
