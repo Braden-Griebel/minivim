@@ -119,7 +119,7 @@ now(function()
 			{
 				name = "Root",
 				action = function()
-					MiniFiles.open(_G.find_git_root_no_buf())
+					MiniFiles.open(_G.find_git_root())
 				end,
 				section = "Explore",
 			},
