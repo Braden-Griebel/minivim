@@ -587,6 +587,9 @@ ___  ____       _ _   _ _
 	}
 	math.randomseed(os.time())
 	math.random()
+	math.random()
+	math.random()
+	math.random()
 	local random_header = starter_headers[math.random(#starter_headers)]
 	local starter = require("mini.starter")
 	require("mini.starter").setup({
