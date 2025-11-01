@@ -1,19 +1,8 @@
 -- Make concise helpers for installing/adding plugins in two stages
-local add, later, now = MiniDeps.add, MiniDeps.later, MiniDeps.now
+local add, later = MiniDeps.add, MiniDeps.later, MiniDeps.now
 local now_if_args = _G.Config.now_if_args
--- Helper for defining plugin keymaps
-local nmap_leader = function(suffix, rhs, desc)
-	vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
-end
-local nmap = function(lhs, rhs, desc)
-	-- See `:h vim.keymap.set()`
-	vim.keymap.set("n", lhs, rhs, { desc = desc })
-end
-local xmap = function(lhs, rhs, desc)
-	-- See `:h vim.keymap.set()`
-	vim.keymap.set("x", lhs, rhs, { desc = desc })
-end
--- Tree-sitter
+
+-- Tree-sitter ================================================================
 now_if_args(function()
 	add({
 		source = "nvim-treesitter/nvim-treesitter",
@@ -137,6 +126,7 @@ later(function()
 end)
 
 -- Linting ====================================================================
+
 later(function()
 	add("mfussenegger/nvim-lint")
 
@@ -154,6 +144,7 @@ later(function()
 		end,
 	})
 end)
+
 -- Git ========================================================================
 later(function()
 	add("lewis6991/gitsigns.nvim")
@@ -171,7 +162,7 @@ later(function()
 	vim.cmd([[hi GitSignsChange guifg=#83fce6]])
 	vim.cmd([[hi GitSignsDelete guifg=#fa2525]])
 	add("kdheepak/lazygit.nvim")
-	nmap_leader("gz", "<cmd>LazyGit<cr>", "LazyGit")
+	_G.Config.nmap_leader("gz", "<cmd>LazyGit<cr>", "LazyGit")
 
 	-- Diff view
 	add("sindrets/diffview.nvim")
@@ -213,10 +204,10 @@ later(function()
 		socket_name = vim.fn.split(vim.env.TMUX, ",")[1],
 		target_pane = ":.2",
 	}
-	nmap("gz", "<Plug>SlimeMotionSend", "Slime Motion Send")
-	nmap("gzz", "<Plug>SlimeLineSend", "Slime Motion Send")
-	xmap("gz", "<Plug>SlimeRegionSend", "Slime Region Send")
-	nmap("gzc", "<Plug>SlimeConfig", "Slime Config")
+	_G.Config.nmap("gz", "<Plug>SlimeMotionSend", "Slime Motion Send")
+	_G.Config.nmap("gzz", "<Plug>SlimeLineSend", "Slime Motion Send")
+	_G.Config.xmap("gz", "<Plug>SlimeRegionSend", "Slime Region Send")
+	_G.Config.nmap("gzc", "<Plug>SlimeConfig", "Slime Config")
 end)
 
 -- Snippets ===================================================================
@@ -226,16 +217,19 @@ later(function()
 end)
 
 -- Tmux =======================================================================
+
 later(function()
 	add("christoomey/vim-tmux-navigator")
 	vim.g.tmux_navigator_no_mappings = 1
-	nmap("<c-h>", "<cmd>TmuxNavigateLeft<cr>")
-	nmap("<c-j>", "<cmd>TmuxNavigateDown<cr>")
-	nmap("<c-k>", "<cmd>TmuxNavigateUp<cr>")
-	nmap("<c-l>", "<cmd>TmuxNavigateRight<cr>")
+	_G.Config.nmap("<c-h>", "<cmd>TmuxNavigateLeft<cr>")
+	_G.Config.nmap("<c-j>", "<cmd>TmuxNavigateDown<cr>")
+	_G.Config.nmap("<c-k>", "<cmd>TmuxNavigateUp<cr>")
+	_G.Config.nmap("<c-l>", "<cmd>TmuxNavigateRight<cr>")
 end)
 
+-- ############################### Languages ################################
 -- Markdown =================================================================
+
 later(function()
 	add("MeanderingProgrammer/render-markdown.nvim")
 	require("render-markdown").setup({})
@@ -297,6 +291,7 @@ later(function()
 	add("tpope/vim-sleuth")
 end)
 
+-- ############################### UI ####################################
 -- Terminal ==============================================================
 later(function()
 	add("akinsho/toggleterm.nvim")
@@ -313,22 +308,22 @@ later(function()
 		shell = "bash",
 	})
 	-- Keymaps
-	nmap(
+	_G.Config.nmap(
 		"<leader>tr",
 		"<cmd>TermNew size=40 dir=git_dir direction=float name=root-terminal<cr>",
 		"Open [T]erminal [R]oot Directory"
 	)
-	nmap(
+	_G.Config.nmap(
 		"<leader>tc",
 		"<cmd>TermNew size=40 dir=. direction=float name=cwd-terminal<cr>",
 		"Open [T]erminal [C]urrent [W]orking [D]irectory"
 	)
-	nmap(
+	_G.Config.nmap(
 		"<leader>tb",
 		"<cmd>TermNew size=20 dir=. direction=horizontal name=horizontal-terminal<cr>",
 		"Open [B]ottom Terminal"
 	)
-	nmap("<leader>ts", "<cmd>TermSelect<cr>", "[S]elect Terminal")
+	_G.Config.nmap("<leader>ts", "<cmd>TermSelect<cr>", "[S]elect Terminal")
 end)
 
 -- Neotree =============================================================
@@ -393,14 +388,14 @@ later(function()
 			},
 		},
 	})
-	nmap_leader("et", "<cmd>Neotree reveal<cr>", "Tree")
+	_G.Config.nmap_leader("et", "<cmd>Neotree reveal<cr>", "Tree")
 end)
 
 -- Todo Comments =======================================================
 later(function()
 	add({ source = "folke/todo-comments.nvim", depends = { "nvim-lua/plenary.nvim" } })
 	require("todo-comments").setup({})
-	nmap_leader("ft", "<cmd>TodoQuickFix<cr>", "Todo QuickFix")
+	_G.Config.nmap_leader("ft", "<cmd>TodoQuickFix<cr>", "Todo QuickFix")
 end)
 
 -- Noice ===============================================================
@@ -413,7 +408,7 @@ later(function()
 			view = "cmdline_popup",
 		},
 		messages = {
-			enabled = true,
+			enabled = false,
 			view = "notify",
 		},
 		popupmenu = {
@@ -436,7 +431,7 @@ later(function()
 			},
 		},
 		presets = {
-			bottom_search = true,
+			bottom_search = false,
 		},
 	})
 end)
