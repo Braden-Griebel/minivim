@@ -167,6 +167,7 @@ later(function()
 	-- Diff view
 	add("sindrets/diffview.nvim")
 	require("diffview").setup({})
+	_G.Config.nmap_leader("gv", "<cmd>DiffViewOpen<cr>", "Diff view")
 end)
 
 -- Marks ======================================================================
