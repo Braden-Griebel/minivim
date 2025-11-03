@@ -240,3 +240,14 @@ local pick_colorscheme = function()
 end
 
 _G.Config.nmap_leader("op", pick_colorscheme, "Pick Colorscheme")
+
+-- Create a keymap for finding Synonyms for the word under cursor
+local find_synonym = function()
+	local thesaurus_result = vim.fn.systemlist("dict -d moby-thesaurus " .. vim.fn.expand("<cword>"))
+	if vim.v.shell_error ~= 0 then
+		print("Unable to call dict")
+	end
+	print(table.concat(thesaurus_result, "\n"))
+end
+
+_G.Config.nmap_leader("lS", find_synonym, "Synonyms")
