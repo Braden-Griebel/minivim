@@ -70,8 +70,9 @@ end)
 -- Notify
 now(function()
 	require("mini.notify").setup({
-		lsp_progress = { enable = false }, -- Prefer noice for this
+		lsp_progress = { enable = false }, -- Prefer fidget for this
 	})
+	-- Keymap for showing history
 	vim.keymap.set("n", "<leader>oh", function()
 		MiniNotify.show_history()
 	end, { desc = "Show Notification History" })
@@ -442,6 +443,7 @@ later(function()
 		},
 	})
 
+	-- Start LSP server to integrate with mini.completion
 	MiniSnippets.start_lsp_server()
 end)
 

@@ -399,40 +399,8 @@ later(function()
 	_G.Config.nmap_leader("ft", "<cmd>TodoQuickFix<cr>", "Todo QuickFix")
 end)
 
--- Noice ===============================================================
--- Some nice UI elements, only using LSP progress and command line (notify handled by mini)
+-- Fidget =============================================================
 later(function()
-	add({ source = "folke/noice.nvim", depends = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" } })
-	require("noice").setup({
-		cmdline = {
-			enable = true,
-			view = "cmdline_popup",
-		},
-		messages = {
-			enabled = false,
-			view = "notify",
-		},
-		popupmenu = {
-			enabled = false,
-			view = "hover",
-		},
-		notify = {
-			enabled = false,
-			view = "notify",
-		},
-		lsp = {
-			progress = { enabled = true },
-			hover = { enabled = false },
-			signature = { enabled = false },
-			message = { enabled = true, view = "mini" },
-		},
-		commands = {
-			history = {
-				view = "popup",
-			},
-		},
-		presets = {
-			bottom_search = false,
-		},
-	})
+	add("j-hui/fidget.nvim")
+	require("fidget").setup({})
 end)
