@@ -412,7 +412,8 @@ later(function()
 	require("zen-mode").setup({
 		window = {
 			backdrop = 1,
-			width = 0.8,
+			width = 1,
+			height = 1,
 			options = {
 				signcolumn = "no",
 				number = false,
@@ -446,7 +447,6 @@ later(function()
 					suppress_on_insert = true,
 				},
 				display = { render_limit = 0 },
-				notification = { poll_rate = 0 },
 			})
 			-- Disable virtual text and lines
 			vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
@@ -462,7 +462,6 @@ later(function()
 					suppress_on_insert = false,
 				},
 				display = { render_limit = 16 },
-				notification = { poll_rate = 10 },
 			})
 			vim.diagnostic.config({ virtual_text = true }) -- TODO: Better toggle
 		end,
