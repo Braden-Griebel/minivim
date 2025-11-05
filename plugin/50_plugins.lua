@@ -411,8 +411,8 @@ later(function()
 	add("folke/zen-mode.nvim")
 	require("zen-mode").setup({
 		window = {
-			backdrop = 1,
-			width = 1,
+			backdrop = 0,
+			width = 0.7,
 			height = 1,
 			options = {
 				signcolumn = "no",
