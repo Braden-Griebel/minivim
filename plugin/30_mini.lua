@@ -13,7 +13,7 @@ local now_if_args = _G.Config.now_if_args
 -- Step one ===================================================================
 -- Set rose-pine colorscheme (built using mini.base16)
 now(function()
-	vim.cmd("colorscheme rose-pine")
+	vim.cmd("colorscheme " .. _G.Config.colorscheme)
 end)
 
 -- Basics

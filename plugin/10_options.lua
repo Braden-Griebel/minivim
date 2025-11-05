@@ -36,15 +36,23 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- UI Settings ----------------------------------------------------
+-- Colorscheme
+_G.Config.colorscheme = "rose-pine"
+_G.Config.focus_colorscheme = "grayscale-light"
+
+-- Some config options passed around
+_G.Config.cursorline = true
+
 vim.o.breakindent = true -- Indent wrapped lines to match line start
 vim.o.breakindentopt = "list:-1" -- Add padding for lists (if 'wrap' is set)
 vim.o.colorcolumn = "+1" -- Draw column on the right of maximum width
-vim.o.cursorline = true -- Enable current line highlighting
+vim.o.cursorline = _G.Config.cursorline -- Enable current line highlighting
 vim.o.linebreak = true -- Wrap lines at 'breakat' (if 'wrap' is set)
 vim.o.list = true -- Show helpful text indicators
 vim.o.number = true -- Show line numbers
 vim.o.pumheight = 10 -- Make popup menu smaller
 vim.o.ruler = false -- Don't show cursor coordinates
+vim.o.scrolloff = 10
 vim.o.shortmess = "CFOSWaco" -- Disable some built-in completion messages
 vim.o.showmode = false -- Don't show mode in command line
 vim.o.signcolumn = "yes" -- Always show signcolumn (less flicker)

@@ -405,6 +405,72 @@ later(function()
 	require("fidget").setup({})
 end)
 
+-- Zen ===============================================================
+-- Currently set up for writing
+later(function()
+	add("folke/zen-mode.nvim")
+	require("zen-mode").setup({
+		window = {
+			backdrop = 1,
+			width = 0.8,
+			options = {
+				signcolumn = "no",
+				number = false,
+				relativenumber = false,
+				cursorline = false,
+				cursorcolumn = false,
+				foldcolumn = "0",
+				list = false,
+			},
+			plugins = {
+				options = {
+					enabled = true,
+					ruler = false,
+					showcmd = false,
+					laststatus = 0,
+				},
+				gitsigns = { enabled = false },
+				tmux = { enabled = true },
+			},
+		},
+		on_open = function()
+			-- Modify colorscheme
+			vim.cmd("colorscheme " .. _G.Config.focus_colorscheme)
+			-- Disable mini modules
+			vim.g.mininotify_disable = true
+			vim.g.minicursorword_disable = true
+			vim.g.minicompletion_disable = true
+			-- Disable fidget polling
+			require("fidget").setup({
+				progress = {
+					suppress_on_insert = true,
+				},
+				display = { render_limit = 0 },
+				notification = { poll_rate = 0 },
+			})
+			-- Disable virtual text and lines
+			vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
+		end,
+		on_close = function()
+			-- Undo on_open function
+			vim.cmd("colorscheme " .. _G.Config.colorscheme)
+			vim.g.mininotify_disable = false
+			vim.g.minicursorword_disable = false
+			vim.g.minicompletion_disable = false
+			require("fidget").setup({
+				progress = {
+					suppress_on_insert = false,
+				},
+				display = { render_limit = 16 },
+				notification = { poll_rate = 10 },
+			})
+			vim.diagnostic.config({ virtual_text = true }) -- TODO: Better toggle
+		end,
+	})
+
+	_G.Config.nmap("\\z", "<cmd>Zen<cr>", "Toggle 'zen'")
+end)
+
 -- More Colorschemes (Used with switch colorscheme keymap) ===========
 later(function()
 	add("oxfist/night-owl.nvim")
@@ -417,4 +483,5 @@ later(function()
 	add("yorik1984/newpaper.nvim")
 	add("ianklapouch/wildberries.nvim")
 	add("Abstract-IDE/Abstract-cs")
+	add("idr4n/github-monochrome.nvim")
 end)
