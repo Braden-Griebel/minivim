@@ -174,6 +174,9 @@ later(function()
 		source = "NeogitOrg/neogit",
 		depends = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
 	})
+
+	-- Keymap to open neogit
+	_G.Config.nmap_leader("gn", "<cmd>Neogit<cr>", "Open Neogit")
 end)
 
 -- Marks ======================================================================
