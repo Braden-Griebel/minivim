@@ -168,6 +168,12 @@ later(function()
 	add("sindrets/diffview.nvim")
 	require("diffview").setup({})
 	_G.Config.nmap_leader("gv", "<cmd>DiffViewOpen<cr>", "Diff view")
+
+	-- Neogit
+	add({
+		source = "NeogitOrg/neogit",
+		depends = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+	})
 end)
 
 -- Marks ======================================================================
