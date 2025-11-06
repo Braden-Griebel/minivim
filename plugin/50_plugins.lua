@@ -1,5 +1,5 @@
 -- Make concise helpers for installing/adding plugins in two stages
-local add, later = MiniDeps.add, MiniDeps.later, MiniDeps.now
+local add, later, now = MiniDeps.add, MiniDeps.later, MiniDeps.now
 local now_if_args = _G.Config.now_if_args
 
 -- Tree-sitter ================================================================
@@ -227,7 +227,6 @@ later(function()
 end)
 
 -- Tmux =======================================================================
-
 later(function()
 	vim.g.tmux_navigator_no_mappings = 1
 	add("christoomey/vim-tmux-navigator")
