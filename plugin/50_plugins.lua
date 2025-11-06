@@ -398,6 +398,7 @@ later(function()
 		},
 	})
 	_G.Config.nmap_leader("et", "<cmd>Neotree reveal<cr>", "Tree")
+	_G.Config.nmap("\\\\", "<cmd>Neotree reveal<cr>", "Tree")
 end)
 
 -- Todo Comments =======================================================
