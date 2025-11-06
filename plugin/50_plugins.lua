@@ -229,8 +229,8 @@ end)
 -- Tmux =======================================================================
 
 later(function()
-	add("christoomey/vim-tmux-navigator")
 	vim.g.tmux_navigator_no_mappings = 1
+	add("christoomey/vim-tmux-navigator")
 	_G.Config.nmap("<c-h>", "<cmd>TmuxNavigateLeft<cr>")
 	_G.Config.nmap("<c-j>", "<cmd>TmuxNavigateDown<cr>")
 	_G.Config.nmap("<c-k>", "<cmd>TmuxNavigateUp<cr>")
