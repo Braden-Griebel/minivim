@@ -75,6 +75,7 @@ later(function()
 			"harper-ls",
 			"marksman",
 			"markdownlint-cli2",
+			"mdformat",
 			-- Ocaml
 			"ocaml-lsp",
 			-- Python
