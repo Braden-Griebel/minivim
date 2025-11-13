@@ -118,7 +118,7 @@ now(function()
 				section = "Explore",
 			},
 			starter.sections.sessions(5, true),
-			starter.sections.recent_files(5, false),
+			starter.sections.recent_files(5, false, false),
 			starter.sections.builtin_actions(),
 		},
 	})
