@@ -81,7 +81,7 @@ later(function()
 			-- Python
 			"pyright",
 			"ruff",
-			"mypy",
+			-- "mypy", -- Removed since mypy must be installed in activated venv to work well
 			-- R
 			"air",
 			"r-languageserver",
