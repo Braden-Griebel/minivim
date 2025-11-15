@@ -202,6 +202,7 @@ later(function()
 			Config.leader_group_clues,
 			{ mode = "n", keys = "gz", desc = "Slime" },
 			{ mode = "n", keys = "\\v", desc = "Toggle Virtual" },
+			{ mode = "n", keys = "<leader>r", desc = "+Repl" },
 			miniclue.gen_clues.builtin_completion(),
 			miniclue.gen_clues.g(),
 			miniclue.gen_clues.marks(),
@@ -213,8 +214,8 @@ later(function()
 		triggers = {
 			{ mode = "n", keys = "<Leader>" }, -- Leader triggers
 			{ mode = "x", keys = "<Leader>" },
-			{ mode = "n", keys = "<localleader>" },
-			{ mode = "v", keys = "<localleader>" },
+			{ mode = "n", keys = "<Localleader" },
+			{ mode = "x", keys = "<Localleader>" },
 			{ mode = "n", keys = "\\" }, -- mini.basics
 			{ mode = "n", keys = "[" }, -- mini.bracketed
 			{ mode = "n", keys = "]" },

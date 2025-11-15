@@ -215,6 +215,9 @@ _G.Config.nmap_leader("vL", "<Cmd>lua MiniVisits.remove_label()<CR>", "Remove la
 -- Map for stopping search highlights
 _G.Config.nmap("<ESC>", "<cmd>nohlsearch<cr>", "Hide Search Highlights")
 
+-- Map for existing terminal mode
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
+
 -- Maps for toggling virtual text
 _G.Config.nmap("\\vt", function()
 	vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
