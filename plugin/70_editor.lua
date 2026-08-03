@@ -143,12 +143,8 @@ end)
 
 -- Tmux =======================================================================
 later(function()
-	vim.g.tmux_navigator_no_mappings = 1
-	add({ "https://github.com/christoomey/vim-tmux-navigator" })
-	Config.nmap("<c-h>", "<cmd>TmuxNavigateLeft<cr>")
-	Config.nmap("<c-j>", "<cmd>TmuxNavigateDown<cr>")
-	Config.nmap("<c-k>", "<cmd>TmuxNavigateUp<cr>")
-	Config.nmap("<c-l>", "<cmd>TmuxNavigateRight<cr>")
+	add({ "https://github.com/aserowy/tmux.nvim.git" })
+	require("tmux").setup()
 end)
 
 -- Todo Comments =======================================================
@@ -241,10 +237,10 @@ later(function()
 	end)
 
 	-- Add cursors at matches
-	set({ "n", "x" }, "<c-j>", function()
+	set({ "n", "x" }, "<a-j>", function()
 		mc.matchAddCursor(1)
 	end)
-	set({ "n", "x" }, "<c-k>", function()
+	set({ "n", "x" }, "<a-k>", function()
 		mc.matchAddCursor(-1)
 	end)
 
