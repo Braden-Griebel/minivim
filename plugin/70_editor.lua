@@ -144,7 +144,7 @@ end)
 -- Tmux =======================================================================
 later(function()
 	add({ "https://github.com/aserowy/tmux.nvim.git" })
-	require("tmux").setup()
+	require("tmux").setup({ copy_sync = { enable = false } })
 end)
 
 -- Todo Comments =======================================================
