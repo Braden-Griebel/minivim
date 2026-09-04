@@ -6,31 +6,32 @@ vim.lsp.inlay_hint.enable(true)
 
 -- Completion
 now_if_args(function()
-	add({ { src = "https://github.com/Saghen/blink.compat", version = "v2.5.0" } })
-	require("blink.compat").setup({})
-	add({ "https://github.com/rafamadriz/friendly-snippets" })
-
-	add({ {
-		src = "https://github.com/saghen/blink.cmp",
-		version = "v1.10.2",
-	} })
-	require("blink.cmp").setup({
-		enabled = function()
-			return not vim.g.blinkcompletion_disable
-		end,
-		keymap = { preset = "enter" },
-		appearance = { nerd_font_variant = "mono" },
-		completion = {
-			documentation = { auto_show = true },
-			list = { selection = { preselect = true } },
-			ghost_text = { enabled = true },
+	-- Customize post-processing of LSP responses for a better user experience.
+	-- Don't show 'Text' suggestions (usually noisy) and show snippets last.
+	local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
+	local process_items = function(items, base)
+		return MiniCompletion.default_process_items(items, base, process_items_opts)
+	end
+	require("mini.completion").setup({
+		lsp_completion = {
+			-- Without this config autocompletion is set up through `:h 'completefunc'`.
+			-- Although not needed, setting up through `:h 'omnifunc'` is cleaner
+			-- (sets up only when needed) and makes it possible to use `<C-u>`.
+			source_func = "omnifunc",
+			auto_setup = false,
+			process_items = process_items,
 		},
-		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
-		},
-		fuzzy = { implementation = "prefer_rust_with_warning" },
-		signature = { enabled = true },
 	})
+
+	-- Set 'omnifunc' for LSP completion only when needed.
+	local on_attach = function(ev)
+		vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+	end
+	Config.new_autocmd("LspAttach", nil, on_attach, "Set 'omnifunc'")
+
+	-- Advertise to servers that Neovim now supports certain set of completion and
+	-- signature features through 'mini.completion'.
+	vim.lsp.config("*", { capabilities = MiniCompletion.get_lsp_capabilities() })
 end)
 
 -- Tree-sitter ================================================================
